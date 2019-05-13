@@ -1,4 +1,4 @@
-package com;
+package com.ers;
 
 public enum ReimbursementTypes {
 	LODGING(1), TRAVEL(2), FOOD(3), OTHER(4);
