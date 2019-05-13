@@ -1,4 +1,4 @@
-package com.java.ers;
+package com;
 
 public class FinanceManager {
 

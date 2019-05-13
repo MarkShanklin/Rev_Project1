@@ -1,4 +1,4 @@
-package com.java.ers;
+package com;
 
 public enum ReimbursementStatus {
 	PENDING, APPROVED, DENIED;

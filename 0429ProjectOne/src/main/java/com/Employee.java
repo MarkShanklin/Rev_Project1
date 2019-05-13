@@ -1,4 +1,4 @@
-package com.java.ers;
+package com;
 
 public class Employee {
 	int usedId;
@@ -6,5 +6,4 @@ public class Employee {
 	String password;
 	String firstName;
 	String lastName;
-	
 }
