@@ -9,4 +9,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  	<servlet>
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.ers.servlets.LoginServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/projectOneUrl</url-pattern>
+	</servlet-mapping>
+  
 </web-app>
