@@ -7,6 +7,11 @@ public class Employee {
 	String password;
 	String firstName;
 	String lastName;
+	String type; //for determining if is user of finance manager.
+
+	public Employee() {
+
+	}
 
 	public Employee(int usedId, String username, String password, String firstName, String lastName) {
 		super();
@@ -15,10 +20,6 @@ public class Employee {
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-	}
-
-	public void login() {
-		// TODO login implementation. may not go here?
 	}
 
 	public int getUsedId() {
@@ -59,6 +60,14 @@ public class Employee {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Override
