@@ -1,13 +1,13 @@
 package com.ers;
 
 public class Employee {
-	
+
 	int usedId;
 	String username;
 	String password;
 	String firstName;
 	String lastName;
-	
+
 	public Employee(int usedId, String username, String password, String firstName, String lastName) {
 		super();
 		this.usedId = usedId;
@@ -17,9 +17,8 @@ public class Employee {
 		this.lastName = lastName;
 	}
 
-	public void login()
-	{
-		//TODO login implementation. may not go here?
+	public void login() {
+		// TODO login implementation. may not go here?
 	}
 
 	public int getUsedId() {
@@ -61,7 +60,7 @@ public class Employee {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Employee [usedId=" + usedId + ", username=" + username + ", password=" + password + ", firstName="
