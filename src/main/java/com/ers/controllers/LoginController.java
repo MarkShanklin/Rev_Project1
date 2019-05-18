@@ -15,6 +15,7 @@ public class LoginController {
 		EmployeeDaoImpl empImpl = new EmployeeDaoImpl();
 		Employee emp = new Employee();
 		emp = empImpl.selectEmployeeByUsername(username);
+		request.getSession().setAttribute("employee", emp);
 		String type = emp.getType();
 
 		if (type.equals("Emp")) {

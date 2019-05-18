@@ -5,21 +5,21 @@ public class Employee {
 	int usedId;
 	String username;
 	String password;
-	String firstName;
-	String lastName;
-	String type; //for determining if is user of finance manager.
+	String firstname;
+	String lastname;
+	String type; // for determining if is user of finance manager.
 
 	public Employee() {
 
 	}
 
-	public Employee(int usedId, String username, String password, String firstName, String lastName) {
-		super();
+	public Employee(int usedId, String username, String password, String firstname, String lastname, String type) {
 		this.usedId = usedId;
 		this.username = username;
 		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.type = type;
 	}
 
 	public int getUsedId() {
@@ -47,21 +47,21 @@ public class Employee {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstname = firstName;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastname = lastName;
 	}
-	
+
 	public String getType() {
 		return type;
 	}
@@ -72,7 +72,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [usedId=" + usedId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + "]";
+		return "Employee [usedId=" + usedId + ", username=" + username + ", password=" + password + ", firstname="
+				+ firstname + ", lastname=" + lastname + "]";
 	}
 }
