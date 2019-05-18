@@ -3,8 +3,10 @@ package com.ers.controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 public class RequestHelper {
-	
+	final static Logger loggy = Logger.getLogger(RequestHelper.class);
 	public static String process(HttpServletRequest request, HttpServletResponse response) {
 		switch (request.getRequestURI()) {
 		case "/0429ProjectOne/html/Login.do":
@@ -20,7 +22,7 @@ public class RequestHelper {
 		case "/0429ProjectOne/html/LoadExpensesById.do":
 			return EmployeeExpenseController.loadExpensesById(request, response);
 		default:
-			System.out.println("Not a valid .do string recieved");
+			loggy.info("Not a valid .do string recieved");
 			return null;
 		}
 	}

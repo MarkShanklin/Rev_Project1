@@ -7,12 +7,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.ers.Expense;
 import com.ers.dao.ExpenseDaoImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class AdminExpenseController {
+	final static Logger loggy = Logger.getLogger(AdminExpenseController.class);
 
 	public static String loadExpenses(HttpServletRequest request, HttpServletResponse response) {
 		ExpenseDaoImpl expImpl = new ExpenseDaoImpl();
@@ -21,11 +24,9 @@ public class AdminExpenseController {
 		try {
 			response.getWriter().write(new ObjectMapper().writeValueAsString(lExp));
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			loggy.error(e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			loggy.error(e);
 		}
 		return "/html/AdminHome.html";
 	}

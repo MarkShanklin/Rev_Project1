@@ -11,11 +11,14 @@ import java.util.List;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import org.apache.log4j.Logger;
+
 import com.ers.Employee;
 import com.ers.Expense;
 import com.ers.ReimbursementStatus;
 
 public class ExpenseDaoImpl implements ExpenseDao {
+	final static Logger loggy = Logger.getLogger(ExpenseDaoImpl.class);
 
 	static {
 
@@ -25,7 +28,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
 		} catch (ClassNotFoundException e) {
 
-			e.printStackTrace();
+			loggy.error(e);
 
 		}
 
@@ -52,7 +55,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
 			ps.setString(9, exp.getDescription());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggy.error(e);
 		}
 		return 0;
 	}
@@ -70,7 +73,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggy.error(e);
 		}
 		return exps;
 	}
@@ -86,7 +89,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
 						rs.getDouble(6), rs.getDate(7), rs.getDate(8), rs.getInt(9), rs.getString(10)));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggy.error(e);
 		}
 		return exps;
 	}
@@ -106,7 +109,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
 			ps.setInt(3, ticket_id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggy.error(e);
 		}
 	}
 
@@ -120,7 +123,7 @@ public class ExpenseDaoImpl implements ExpenseDao {
 			ps.setInt(3, ticket_id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggy.error(e);
 		}
 	}
 

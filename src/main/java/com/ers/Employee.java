@@ -1,6 +1,10 @@
 package com.ers;
 
+import org.apache.log4j.Logger;
+
 public class Employee {
+	
+	final static Logger loggy = Logger.getLogger(Employee.class);
 
 	int usedId;
 	String username;

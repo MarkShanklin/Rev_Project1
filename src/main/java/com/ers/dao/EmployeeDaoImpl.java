@@ -8,19 +8,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ers.Employee;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+	
+	final static Logger loggy = Logger.getLogger(EmployeeDaoImpl.class);
+	
 	static {
 
 		try {
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-
+		} catch (ClassNotFoundException e) {			
+			loggy.error(e);
 		}
 
 	}
@@ -41,7 +44,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 						rs.getString(6));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggy.error(e);
 		}
 		return emp;
 	}
@@ -57,7 +60,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 						rs.getString(6)));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggy.error(e);
 		}
 		return emps;
 	}
@@ -75,7 +78,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.setInt(6, emp.getUsedId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggy.error(e);
 		}
 	}
 
@@ -87,7 +90,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggy.error(e);
 		}
 	}
 
