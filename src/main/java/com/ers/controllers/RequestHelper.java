@@ -17,6 +17,8 @@ public class RequestHelper {
 			return AdminExpenseController.approveExpense(request, response);
 		case "/0429ProjectOne/html/DenyExpense.do":
 			return AdminExpenseController.denyExpense(request, response);
+		case "/0429ProjectOne/html/LoadExpensesById.do":
+			return EmployeeExpenseController.loadExpensesById(request, response);
 		default:
 			System.out.println("Not a valid .do string recieved");
 			return null;

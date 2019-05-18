@@ -57,7 +57,7 @@ function getRequests() {
         }
     }
 	// create a connection (method, url, boolean asynch or not)
-    xhttp.open("GET", "/0429ProjectOne/html/LoadExpenses.do", true);
+    xhttp.open("GET", "/0429ProjectOne/html/LoadExpensesById.do", true);
     xhttp.send();
 }
 /*
@@ -67,24 +67,17 @@ function setValues(list) {
     
     let table = document.getElementById("reimbtable");
     table.innerHTML = `<tr>
-                       <th>User Id</th>
-                       <th>First Name</th>
-                       <th>Last Name</th>
+                       <th>Ticket Id</th>
                        <th>Type</th>
                        <th>Amount</th>
                        <th>Date submitted</th>
                        <th>Date resolved</th>
                        <th>Status</th>
                        <th>Description</th>
-                       <th>Ticket Id</th>
-                       <th></th>
                        </tr>`
     
     for (r in list) {
         let trNewRow = document.createElement("tr");
-        let tdUser = document.createElement("td");
-        let tdFirstName = document.createElement("td");
-        let tdLastName = document.createElement("td");
         let tdType = document.createElement("td");
         let tdAmount = document.createElement("td");
         let tdSubmitDate = document.createElement("td");
@@ -92,12 +85,9 @@ function setValues(list) {
         let tdStatus = document.createElement("td");
         let tdDescription = document.createElement("td");
         let tdTicketId = document.createElement("td");
-        let tdButtons = document.createElement("td");
         
-        // Author Name
-        tdUser.innerHTML = list[r].employeeId;
-        tdFirstName.innerHTML = list[r].firstname;
-        tdLastName.innerHTML = list[r].lastname;
+        // Ticket Number
+        tdTicketId.innerHTML = list[r].ticketId;
         // Type
         switch (list[r].type) {
         case "LODGING":
@@ -133,71 +123,17 @@ function setValues(list) {
         }
         // Description
         tdDescription.innerHTML = list[r].description;
-        // Ticket Number
-        tdTicketId.innerHTML = list[r].ticketId;
-        
-        // Buttons
-        if (list[r].status == "PENDING") {
-            btnApprove = document.createElement("button");
-            btnApprove.setAttribute("name", "btnApprove");
-            btnApprove.setAttribute("value", list[r].ticketId);
-            btnApprove.style.width = "200px";
-            btnApprove.style.background = "green";
-            btnApprove.style.color = "white";
-            btnApprove.innerText = "APPROVE";
-            btnApprove.addEventListener('click', approveExpense);
-
-            btnDeny = document.createElement("button");
-            btnDeny.setAttribute("name", "btnDeny");
-            btnDeny.setAttribute("value", list[r].ticketId);
-            btnDeny.style.width = "200px";
-            btnDeny.style.background = "red";
-            btnDeny.style.color = "white";
-            btnDeny.innerText = "DENY";
-            btnDeny.addEventListener('click', denyExpense);
-            
-            tdButtons.appendChild(btnApprove);
-            tdButtons.appendChild(btnDeny);
-        }
-        
-        trNewRow.appendChild(tdUser);
-        trNewRow.appendChild(tdFirstName);
-        trNewRow.appendChild(tdLastName);
+ 
+        //add to the row
+        trNewRow.appendChild(tdTicketId);
         trNewRow.appendChild(tdType);
         trNewRow.appendChild(tdAmount);
         trNewRow.appendChild(tdSubmitDate);
         trNewRow.appendChild(tdResolveDate);
         trNewRow.appendChild(tdStatus);
         trNewRow.appendChild(tdDescription);
-        trNewRow.appendChild(tdTicketId);
-        trNewRow.appendChild(tdButtons);
-       
+
+        //add row to the table
         table.appendChild(trNewRow);
     }
-}
-
-function approveExpense(e) {
-    let target = e.target;
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            getRequests();
-        }
-    }
-    xhttp.open("POST", "/0429ProjectOne/html/ApproveExpense.do", true);
-    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhttp.send("value=" + e.target.value);
-}
-
-function denyExpense(e) {
-    let target = e.target;
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            getRequests();
-        }
-    }
-	xhttp.open("POST", "/0429ProjectOne/html/DenyExpense.do", true);
-    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhttp.send("value=" + e.target.value);
 }

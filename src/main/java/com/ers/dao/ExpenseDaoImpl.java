@@ -1,6 +1,7 @@
 package com.ers.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import com.ers.Employee;
 import com.ers.Expense;
+import com.ers.ReimbursementStatus;
 
 public class ExpenseDaoImpl implements ExpenseDao {
 
@@ -36,9 +38,9 @@ public class ExpenseDaoImpl implements ExpenseDao {
 	@Override
 	public int insertExpense(Expense exp) {
 		try (Connection conn = DriverManager.getConnection(url, username, password)) {
-			PreparedStatement ps = conn.prepareStatement(
-					"INSERT INTO ticket " + "(employee_id,firstname,lastname,type,amount,date_submitted,date_resolved,status,description) "
-							+ "VALUES(?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO ticket "
+					+ "(employee_id,firstname,lastname,type,amount,date_submitted,date_resolved,status,description) "
+					+ "VALUES(?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, exp.getEmployeeId());
 			ps.setString(2, exp.getFirstname());
 			ps.setString(3, exp.getLastname());
@@ -56,14 +58,25 @@ public class ExpenseDaoImpl implements ExpenseDao {
 	}
 
 	@Override
-	public Expense selectTicketsByEmployeeId(int emp_id) {
-
-		return null;
+	public List<Expense> selectExpensesByEmployeeId(int emp_id) {
+		List<Expense> exps = new ArrayList<Expense>();
+		try (Connection conn = DriverManager.getConnection(url, username, password)) {
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ticket");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				if (rs.getInt(2) == emp_id) {
+					exps.add(new Expense(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+							rs.getDouble(6), rs.getDate(7), rs.getDate(8), rs.getInt(9), rs.getString(10)));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return exps;
 	}
 
 	@Override
 	public List<Expense> selectAllExpenses() {
-		System.out.println("selectAllExpenses");
 		List<Expense> exps = new ArrayList<Expense>();
 		try (Connection conn = DriverManager.getConnection(url, username, password)) {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM ticket");
@@ -71,7 +84,6 @@ public class ExpenseDaoImpl implements ExpenseDao {
 			while (rs.next()) {
 				exps.add(new Expense(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
 						rs.getDouble(6), rs.getDate(7), rs.getDate(8), rs.getInt(9), rs.getString(10)));
-				System.out.println("Getting new Expense");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,8 +93,35 @@ public class ExpenseDaoImpl implements ExpenseDao {
 
 	@Override
 	public void updateExpense(Expense exp) {
-		// TODO Auto-generated method stub
+		// TODO
+	}
 
+	@Override
+	public void approveExpense(int ticket_id) {
+		try (Connection conn = DriverManager.getConnection(url, username, password)) {
+			PreparedStatement ps = conn
+					.prepareStatement("UPDATE ticket SET " + "date_resolved=?, status=? WHERE ticket_id=?");
+			ps.setDate(1, new Date(System.currentTimeMillis()));
+			ps.setInt(2, ReimbursementStatus.APPROVED.getValue());
+			ps.setInt(3, ticket_id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void denyExpense(int ticket_id) {
+		try (Connection conn = DriverManager.getConnection(url, username, password)) {
+			PreparedStatement ps = conn
+					.prepareStatement("UPDATE ticket SET " + "date_resolved=?, status=? WHERE ticket_id=?");
+			ps.setDate(1, new Date(System.currentTimeMillis()));
+			ps.setInt(2, ReimbursementStatus.DENIED.getValue());
+			ps.setInt(3, ticket_id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

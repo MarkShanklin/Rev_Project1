@@ -15,10 +15,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class AdminExpenseController {
 
 	public static String loadExpenses(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("loadExpenses");
 		ExpenseDaoImpl expImpl = new ExpenseDaoImpl();
 		List<Expense> lExp = new ArrayList<Expense>();
-		System.out.printf("list of expenses = ?",lExp);
 		lExp = expImpl.selectAllExpenses();
 		try {
 			response.getWriter().write(new ObjectMapper().writeValueAsString(lExp));
@@ -33,12 +31,16 @@ public class AdminExpenseController {
 	}
 
 	public static String approveExpense(HttpServletRequest request, HttpServletResponse response) {
-
+		int ticket_id = Integer.parseInt(request.getParameter("value"));
+		ExpenseDaoImpl expImpl = new ExpenseDaoImpl();
+		expImpl.approveExpense(ticket_id);
 		return "/html/AdminHome.html";
 	}
 
 	public static String denyExpense(HttpServletRequest request, HttpServletResponse response) {
-
+		int ticket_id = Integer.parseInt(request.getParameter("value"));
+		ExpenseDaoImpl expImpl = new ExpenseDaoImpl();
+		expImpl.denyExpense(ticket_id);
 		return "/html/AdminHome.html";
 	}
 }
