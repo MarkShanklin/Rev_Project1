@@ -141,18 +141,20 @@ function setValues(list) {
             btnApprove = document.createElement("button");
             btnApprove.setAttribute("name", "btnApprove");
             btnApprove.setAttribute("value", list[r].ticketId);
-            btnApprove.style.width = "200px";
+            btnApprove.style.width = "100px";
             btnApprove.style.background = "green";
             btnApprove.style.color = "white";
+            btnApprove.style.fontSize = "16px";
             btnApprove.innerText = "APPROVE";
             btnApprove.addEventListener('click', approveExpense);
 
             btnDeny = document.createElement("button");
             btnDeny.setAttribute("name", "btnDeny");
             btnDeny.setAttribute("value", list[r].ticketId);
-            btnDeny.style.width = "200px";
+            btnDeny.style.width = "100px";
             btnDeny.style.background = "red";
             btnDeny.style.color = "white";
+            btnDeny.style.fontSize = "16px";
             btnDeny.innerText = "DENY";
             btnDeny.addEventListener('click', denyExpense);
             

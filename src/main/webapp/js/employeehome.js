@@ -115,7 +115,7 @@ function setValues(list) {
         	tdStatus.innerHTML = "Approved";
             break;
         case "DENIED":
-        	tdStatus.innerHTML = "Denied";
+        	tdStatus.innerHTML = "<span style='color:#FF0000'> Denied </span>";
             break;
         case "PENDING":
         	tdStatus.innerHTML = "Pending";
